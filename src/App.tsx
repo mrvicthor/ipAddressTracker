@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from "react";
+import Banner from "./components/Banner";
+import DetailsPage from "./components/DetailsPage";
+import Map from "./components/Map";
 
-function App() {
+const api: any = process.env.REACT_APP_API;
+const App = () => {
+  useEffect(() => {
+    const fetchIp = async () => {
+      const response = await fetch(
+        ` https://geo.ipify.org/api/v2/country?apiKey=${api}&ipAddress=8.8.8.8`
+      );
+      const data = await response.json();
+      console.log(data);
+    };
+    fetchIp();
+  });
+  // https://geo.ipify.org/api/v2/country?apiKey=at_rfbhvOXSDFDoF6nWVuiBKNaUbtvGo&ipAddress=8.8.8.8
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="h-screen max-h-[100vh]">
+      <Banner />
+      <Map />
+      <DetailsPage />
     </div>
   );
-}
+};
 
 export default App;
