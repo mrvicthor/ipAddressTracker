@@ -21,9 +21,10 @@ const App = () => {
         ` https://geo.ipify.org/api/v2/country,city?apiKey=at_rfbhvOXSDFDoF6nWVuiBKNaUbtvGo&ipAddress=${
           !ipAddress ? "" : ipAddress
         }
-        `
+          `
       );
       const data = await response.json();
+      console.log(data);
       const { ip, location, isp } = data;
       setDefaultIP(ip);
       setLocation(location.city);
@@ -34,16 +35,17 @@ const App = () => {
       setTimezone(location.timezone);
       console.log(location);
     };
+
     fetchIp();
-  }, []);
+  }, [ipAddress]);
 
   console.log(lat);
   console.log(long);
-  // https://geo.ipify.org/api/v2/country?apiKey=at_rfbhvOXSDFDoF6nWVuiBKNaUbtvGo&ipAddress=8.8.8.8
+
   return (
     <div className="h-screen max-h-[100vh]">
-      <Banner />
-      <Map lat={lat as number} long={long as number} />
+      <Banner setIpAdd={setIpAdress} />
+      <Map lat={lat as number} long={long as number} city={location} />
       <DetailsPage
         country={country}
         city={location}

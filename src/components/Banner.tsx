@@ -2,11 +2,14 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useState } from "react";
 
 type Input = {
-  ipAddress: string;
+  ipAddress: number;
 };
+interface Props {
+  setIpAdd: React.Dispatch<React.SetStateAction<Number | undefined>>;
+}
 
-const Banner = () => {
-  const [input, setInput] = useState<String>("");
+const Banner: React.FC<Props> = ({ setIpAdd }) => {
+  const [input, setInput] = useState<Number>();
   const {
     register,
     handleSubmit,
@@ -15,11 +18,12 @@ const Banner = () => {
 
   const onSubmit: SubmitHandler<Input> = (data) => {
     setInput(data.ipAddress);
+    setIpAdd(data.ipAddress);
     console.log(data);
   };
   console.log(input);
   return (
-    <div className="h-[35vh] relative overflow-hidden">
+    <div className="h-[35vh] relative overflow-hidden md:h-[40vh]">
       <img
         src="/pattern-bg.png"
         className="h-[100%] object-cover w-[100%]"
@@ -37,6 +41,7 @@ const Banner = () => {
             type="text"
             className="w-[100%] py-4 px-4"
             {...register("ipAddress", { required: true })}
+            placeholder="Search for any IP address or domain"
           />
           <button
             type="submit"
