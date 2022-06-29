@@ -1,35 +1,32 @@
-import { MapContainer, TileLayer, useMap, Marker, Popup } from "react-leaflet";
-import { useEffect } from "react";
+import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 
 interface Props {
   lat: number;
   long: number;
   city: string;
 }
-const Getlocation = () => {
+
+const DisplayMapComponent: React.FC<Props> = ({ lat, long, city }) => {
   const map = useMap();
-  console.log("map center", map.getCenter());
+  map.setView([lat as number, long as number]);
+  console.log(city);
   return null;
 };
-
 const Map: React.FC<Props> = ({ lat, long, city }) => {
   return (
-    <MapContainer
-      center={[!lat ? 51.50853 : lat, !long ? -0.12574 : long]}
-      zoom={12}
-      scrollWheelZoom={false}
-    >
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-      <Marker position={[!lat ? 51.50853 : lat, !long ? -0.12574 : long]}>
-        <Popup position={[!lat ? 51.50853 : lat, !long ? -0.12574 : long]}>
-          {" "}
-          {city}
-        </Popup>
-      </Marker>
-    </MapContainer>
+    <>
+      <MapContainer center={[lat, long]} zoom={12} scrollWheelZoom={false}>
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        <DisplayMapComponent lat={lat} long={long} city={city} />
+
+        <Marker position={[lat, long]}>
+          <Popup position={[lat, long]}> {city}</Popup>
+        </Marker>
+      </MapContainer>
+    </>
   );
 };
 

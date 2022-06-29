@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 import Banner from "./components/Banner";
 import DetailsPage from "./components/DetailsPage";
 import Map from "./components/Map";
@@ -18,7 +19,7 @@ const App = () => {
   useEffect(() => {
     const fetchIp = async () => {
       const response = await fetch(
-        ` https://geo.ipify.org/api/v2/country,city?apiKey=at_rfbhvOXSDFDoF6nWVuiBKNaUbtvGo&ipAddress=${
+        ` https://geo.ipify.org/api/v2/country,city?apiKey=${api}&ipAddress=${
           !ipAddress ? "" : ipAddress
         }
           `
@@ -39,13 +40,14 @@ const App = () => {
     fetchIp();
   }, [ipAddress]);
 
-  console.log(lat);
-  console.log(long);
-
   return (
     <div className="h-screen max-h-[100vh]">
       <Banner setIpAdd={setIpAdress} />
-      <Map lat={lat as number} long={long as number} city={location} />
+
+      {lat === undefined || long === undefined ? null : (
+        <Map lat={lat as number} long={long as number} city={location} />
+      )}
+
       <DetailsPage
         country={country}
         city={location}
