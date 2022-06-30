@@ -23,7 +23,7 @@ const Banner: React.FC<Props> = ({ setIpAdd }) => {
   };
   console.log(input);
   return (
-    <div className="h-[35vh] relative overflow-hidden md:h-[40vh]">
+    <div className="h-[45vh] relative overflow-hidden md:h-[40vh]">
       <img
         src="/pattern-bg.png"
         className="h-[100%] object-cover w-[100%]"
@@ -39,13 +39,13 @@ const Banner: React.FC<Props> = ({ setIpAdd }) => {
         >
           <input
             type="text"
-            className="w-[100%] py-4 px-4"
+            className="w-[100%] py-4 px-4 hover:cursor-pointer"
             {...register("ipAddress", { required: true })}
             placeholder="Search for any IP address or domain"
           />
           <button
             type="submit"
-            className="absolute right-0 bg-black top-0 h-[100%] text-center px-5"
+            className="absolute right-0 bg-black top-0 h-[100%] text-center px-5 hover:bg-[#24242C]"
           >
             <img src="/icon-arrow.svg" />
           </button>
