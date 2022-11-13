@@ -34,7 +34,7 @@ const Banner: React.FC<Props> = ({ setIpAdd }) => {
           IP Address Tracker
         </h1>
         <form
-          className="w-full relative overflow-hidden rounded-xl"
+          className="w-full relative overflow-hidden rounded-xl md:mx-auto md:max-w-[30rem]"
           onSubmit={handleSubmit(onSubmit)}
         >
           <input
