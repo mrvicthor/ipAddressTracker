@@ -47,7 +47,7 @@ const Banner: React.FC<Props> = ({ setIpAdd }) => {
             type="submit"
             className="absolute right-0 bg-black top-0 h-[100%] text-center px-5 hover:bg-[#24242C]"
           >
-            <img src="/icon-arrow.svg" />
+            <img src="/icon-arrow.svg" alt="submit button" />
           </button>
         </form>
         {errors.ipAddress && (
